@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">服务器通知</string>
+
+    <string name="new_message_notification_title_template">新消息: %1$s</string>
+
+    <string name="action_reconnect">重新连接</string>
+    <string name="action_disconnect">断开连接</string>
+
+    <string name="action_notification_title">服务器通知:</string>
+    <string name="action_connecting">正在连接</string>
+    <string name="action_connected">已连接</string>
+    <string name="action_disconnected">已断开</string>
+    <string name="action_notification_connecting">正在连接到%1$s:%2$d</string>
+    <string name="action_notification_connected">已连接到%1$s:%2$d</string>
+    <string name="action_notification_disconnected">已断开连接</string>
+    <string name="action_share">Share</string>
+    <string name="server_host_hint">主机</string>
+    <string name="server_port_hint">端口号</string>
+    <string name="action_connect">连接</string>
+    <string name="dialog_config_server_title">配置服务器</string>
+    <string name="action_cancel">取消</string>
+    <string name="error_no_empty">此项不能为空</string>
+    <string name="action_config">配置服务器</string>
+    <string name="cb_auto_connect">自动连接</string>
+</resources>

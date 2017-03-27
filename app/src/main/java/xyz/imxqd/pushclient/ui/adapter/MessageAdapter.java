@@ -3,6 +3,7 @@ package xyz.imxqd.pushclient.ui.adapter;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.LinkedList;
@@ -18,6 +19,8 @@ import xyz.imxqd.pushclient.dao.DMessage;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageHolder> {
 
+    public static final int TYPE_NORMAL = 0;
+    public static final int TYPE_EMPTY = 1;
     private LinkedList<DMessage> mList;
     private Context mContext;
 
@@ -28,23 +31,53 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageHolder> {
 
     public void add(DMessage message) {
         mList.addFirst(message);
-        notifyItemInserted(0);
+        notifyDataSetChanged();
+    }
+
+    public void update() {
+        mList = DB.list();
+        notifyDataSetChanged();
     }
 
     @Override
     public MessageHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new MessageHolder(LayoutInflater.from(mContext)
-        .inflate(R.layout.message_item, parent, false));
+        View item = null;
+        switch (viewType) {
+            case TYPE_EMPTY:
+                item = LayoutInflater.from(mContext)
+                        .inflate(R.layout.empty_view, parent, false);
+                break;
+            case TYPE_NORMAL:
+            default:
+                item = LayoutInflater.from(mContext)
+                        .inflate(R.layout.message_item, parent, false);
+                break;
+        }
+        return new MessageHolder(item, viewType);
     }
 
     @Override
     public void onBindViewHolder(MessageHolder holder, int position) {
-        DMessage msg = mList.get(position);
-        holder.bind(msg);
+        if (getItemViewType(position) == TYPE_NORMAL) {
+            DMessage msg = mList.get(position);
+            holder.bind(msg);
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position == mList.size()) {
+            return TYPE_EMPTY;
+        } else {
+            return TYPE_NORMAL;
+        }
     }
 
     @Override
     public int getItemCount() {
+        if (mList.size() == 0) {
+            return 1;
+        }
         return mList.size();
     }
 }

@@ -5,9 +5,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Created by imxqd on 2017/3/26.
@@ -37,6 +35,11 @@ public class DB {
     public static void delete(int id) {
         SQLiteDatabase database = db.heler.getWritableDatabase();
         database.delete("DMessage", "id=" + id, null);
+    }
+
+    public static void deleteAll() {
+        SQLiteDatabase database = db.heler.getWritableDatabase();
+        database.delete("DMessage", null, null);
     }
 
     public static LinkedList<DMessage> list() {

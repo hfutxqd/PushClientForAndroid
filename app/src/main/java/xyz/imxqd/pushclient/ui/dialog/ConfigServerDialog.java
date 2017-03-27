@@ -22,6 +22,10 @@ import xyz.imxqd.pushclient.R;
  */
 
 public class ConfigServerDialog extends DialogFragment {
+    public static final String PATTERN_IP = "((25[0-5])|(2[0-4]\\d)|(1\\d\\d)|([1-9]\\d)|\\d)(\\.((25[0-5])|(2[0-4]\\d)|(1\\d\\d)|([1-9]\\d)|\\d)){3}";
+    public static final String PATTERN_HOSTNAME = "[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+\\.?";
+
+
     private EditText etHost;
     private EditText etPort;
     private CheckBox cbAuto;
@@ -69,9 +73,17 @@ public class ConfigServerDialog extends DialogFragment {
             tiHost.setError(getString(R.string.error_no_empty));
             return false;
         }
+        if (!host.matches(PATTERN_IP) && !host.matches(PATTERN_HOSTNAME)) {
+            tiHost.setError(getString(R.string.error_host_error));
+            return false;
+        }
         tiHost.setError(null);
         if (TextUtils.isEmpty(port)) {
             tiPort.setError(getString(R.string.error_no_empty));
+            return false;
+        }
+        if(Integer.valueOf(port) > 65535) {
+            tiPort.setError(getString(R.string.error_out_of_range));
             return false;
         }
         tiPort.setError(null);

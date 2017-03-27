@@ -23,6 +23,7 @@
         <EditText
             android:id="@+id/et_server_port"
             android:inputType="number"
+            android:maxLength="5"
             android:hint="@string/server_port_hint"
             android:layout_width="300dp"
             android:layout_height="wrap_content" />

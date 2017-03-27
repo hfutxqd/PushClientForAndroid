@@ -17,14 +17,20 @@ import xyz.imxqd.pushclient.dao.DMessage;
 public class MessageHolder extends RecyclerView.ViewHolder {
     TextView time;
     TextView content;
+    int viewType;
 
     public void bind(DMessage msg) {
-        time.setText(SimpleDateFormat.getInstance().format(new Date(msg.getTime())));
-        content.setText(msg.getContent());
+        if (viewType == MessageAdapter.TYPE_NORMAL) {
+            time.setText(SimpleDateFormat.getInstance().format(new Date(msg.getTime())));
+            content.setText(msg.getContent());
+        }
     }
-    public MessageHolder(View itemView) {
+    public MessageHolder(View itemView, int type) {
         super(itemView);
-        time = (TextView) itemView.findViewById(R.id.item_time);
-        content = (TextView) itemView.findViewById(R.id.item_content);
+        viewType = type;
+        if (viewType == MessageAdapter.TYPE_NORMAL) {
+            time = (TextView) itemView.findViewById(R.id.item_time);
+            content = (TextView) itemView.findViewById(R.id.item_content);
+        }
     }
 }

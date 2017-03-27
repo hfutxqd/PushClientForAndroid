@@ -22,4 +22,8 @@
     <string name="error_no_empty">此项不能为空</string>
     <string name="action_config">配置服务器</string>
     <string name="cb_auto_connect">自动连接</string>
+    <string name="error_host_error">服务器地址非法</string>
+    <string name="error_out_of_range">端口号需要在0~65535之间</string>
+    <string name="empty_view_text">暂无数据</string>
+    <string name="action_clear">清空消息</string>
 </resources>

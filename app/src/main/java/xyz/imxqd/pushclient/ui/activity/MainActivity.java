@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import xyz.imxqd.pushclient.dao.DB;
 import xyz.imxqd.pushclient.dao.DMessage;
 import xyz.imxqd.pushclient.service.PushService;
 import xyz.imxqd.pushclient.R;
@@ -67,6 +68,9 @@ public class MainActivity extends AppCompatActivity implements ConfigServerDialo
             dialog.setCallback(this);
             dialog.show(getFragmentManager(), "");
             return true;
+        } else if (item.getItemId() == R.id.action_clear) {
+            DB.deleteAll();
+            mAdapter.update();
         }
         return false;
     }

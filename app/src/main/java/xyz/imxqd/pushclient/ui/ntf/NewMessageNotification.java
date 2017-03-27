@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 
 import xyz.imxqd.pushclient.R;
+import xyz.imxqd.pushclient.ui.activity.MainActivity;
 
 public class NewMessageNotification {
 
@@ -37,7 +38,7 @@ public class NewMessageNotification {
                         PendingIntent.getActivity(
                                 context,
                                 0,
-                                new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com")),
+                                new Intent(context, MainActivity.class),
                                 PendingIntent.FLAG_UPDATE_CURRENT))
 
 

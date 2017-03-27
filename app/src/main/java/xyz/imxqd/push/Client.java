@@ -16,7 +16,7 @@ import xyz.imxqd.push.Message;
  * Created by imxqd on 2017/3/26.
  */
 public final class Client {
-
+    public static final String WELCOME_STR = "MessagePushServer";
     private static final String TAG = "Client";
 
     private Socket mServer;
@@ -39,6 +39,13 @@ public final class Client {
                 BufferedReader in = null;
                 try {
                     in = new BufferedReader(new InputStreamReader(mServer.getInputStream()));
+                    if (!WELCOME_STR.equals(in.readLine())) {
+                        Log.e(TAG, "This server is not a MessagePush server!");
+                        in.close();
+                        mServer.close();
+                        mListener.onDisconnected();
+                        return;
+                    }
                     while (mServer.isConnected() && !mServer.isClosed() && isRunning) {
                         String str = in.readLine();
                         if (str == null || str.length() == 0) {
